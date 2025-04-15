@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JOIN IAS ISIMS SBC</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#e8f0ee] font-sans">
+  <img src="images/join.png" alt="Team Members" class="w-80 md:w-96 lg:w-[670px] mx-auto">
+  <div class="max-w-2xl mx-auto mt-10">
+
+    <!-- Header Section -->
+    <div class="bg-white border-t-8 border-green-800 rounded-md shadow p-6 mb-6">
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">JOIN IAS ISIMS SBC</h1>
+      <p class="text-gray-700">Discover the purpose, fields, and opportunities within IAS and how it can shape your future in industry &amp; IT!</p>
+      <p class="text-sm text-red-600 mt-4">* Indicates required question</p>
+    </div>
+
+    <!-- Form -->
+    <form id="iasForm" class="space-y-6">
+      <!-- Full Name -->
+      <div class="bg-white rounded-md shadow p-4">
+        <label class="block text-gray-800 font-medium mb-1">Full Name <span class="text-red-600">*</span></label>
+        <input type="text" id="fullName" name="fullName" required placeholder="Your answer"
+          class="w-full border-b border-gray-300 focus:outline-none focus:border-blue-500 py-2 px-1 bg-transparent">
+      </div>
+
+      <!-- Phone Number -->
+      <div class="bg-white rounded-md shadow p-4">
+        <label class="block text-gray-800 font-medium mb-1">Phone Number <span class="text-red-600">*</span></label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="Your answer"
+          class="w-full border-b border-gray-300 focus:outline-none focus:border-blue-500 py-2 px-1 bg-transparent">
+      </div>
+
+      <!-- IEEE Mail -->
+      <div class="bg-white rounded-md shadow p-4">
+        <label class="block text-gray-800 font-medium mb-1">IEEE Mail <span class="text-red-600">*</span></label>
+        <input type="email" id="ieeeMail" name="ieeeMail" required placeholder="Your answer"
+          class="w-full border-b border-gray-300 focus:outline-none focus:border-blue-500 py-2 px-1 bg-transparent">
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex justify-between items-center pt-4">
+        <button type="submit" class="bg-green-800 hover:bg-green-900 text-white px-6 py-2 rounded shadow">Submit</button>
+        <button type="reset" class="text-green-800 hover:underline">Clear form</button>
+      </div>
+    </form>
+    <br><br><br>
+  </div>
+
+  <script>
+    document.getElementById("iasForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = {
+        fullName: document.getElementById("fullName").value,
+        phoneNumber: document.getElementById("phoneNumber").value,
+        ieeeMail: document.getElementById("ieeeMail").value
+      };
+
+      fetch("save-form.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(res => res.ok ? alert("Form submitted!") : alert("Error submitting form."))
+      .catch(err => {
+        console.error("AJAX error:", err);
+        alert("Network error. Please try again.");
+      });
+    });
+  </script>
+</body>
+</html>
